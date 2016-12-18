@@ -41,7 +41,24 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope,$cordovaGeolocation,$ionicLoading,$compile,$cordovaSplashscreen) {
+.controller('PlaylistsCtrl', function($scope,$cordovaSQLite,$cordovaGeolocation,$ionicLoading,$compile,$cordovaSplashscreen) {
+      var db = $cordovaSQLite.openDB({ name: "my.db" });
+
+  // for opening a background db:
+  var db = $cordovaSQLite.openDB({ name: "my.db", bgType: 1 });
+
+  $scope.execute = function() {
+    var query = "INSERT INTO test_table (id INTEGER, name TEXT) VALUES (?,?)";
+    $cordovaSQLite.execute(db, query, [1, "ABCDEF"]).then(function(res) {
+      console.log("insertId: " + res.insertId);
+      alert(res.insertId);
+    }, function (err) {
+      console.error(err);
+    });
+  };
+
+
+
     var posOptions = {timeout: 10000, enableHighAccuracy: false};
   $cordovaGeolocation
     .getCurrentPosition(posOptions)
