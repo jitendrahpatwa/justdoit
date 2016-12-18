@@ -41,7 +41,48 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope,$ionicLoading,$compile,$cordovaSplashscreen) {
+.controller('PlaylistsCtrl', function($scope,$cordovaGeolocation,$ionicLoading,$compile,$cordovaSplashscreen) {
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  $cordovaGeolocation
+    .getCurrentPosition(posOptions)
+    .then(function (position) {
+      var lat  = position.coords.latitude;
+      var long = position.coords.longitude;
+      alert("lat:"+lat);
+      alert("long:"+long);
+    }, function(err) {
+      alert(err);
+    });
+
+
+  var watchOptions = {
+    timeout : 3000,
+    enableHighAccuracy: false // may cause errors if true
+  };
+
+  var watch = $cordovaGeolocation.watchPosition(watchOptions);
+  watch.then(
+    null,
+    function(err) {
+      alert(err+" in watch");
+    },
+    function(position) {
+      var lat  = position.coords.latitude;
+      var long = position.coords.longitude;
+      alert("watch lat:"+lat);
+      alert("watch long:"+long);
+  });
+
+
+  watch.clearWatch();
+  // OR
+  $cordovaGeolocation.clearWatch(watch)
+    .then(function(result) {
+      alert("clearWatch:"+result);
+      }, function (error) {
+      alert("clearWatch err :"+error);
+    });
+
   $cordovaSplashscreen.show();
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
