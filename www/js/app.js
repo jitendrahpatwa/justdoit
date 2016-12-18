@@ -23,6 +23,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
       }else{
           StatusBar.backgroundColorByHexString("#db5945");
       }
+      StatusBar.hide();
     }
   });
 })
