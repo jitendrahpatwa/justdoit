@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       //StatusBar.styleDefault();
-      if (cordova.platformId == 'android') {
+      /*if (cordova.platformId == 'android') {
           $cordovaStatusbar.overlaysWebView(true);
           $cordovaStatusbar.styleHex('#699cfa');
         //$cordovaStatusbar.hide();
@@ -28,8 +28,11 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
           $cordovaStatusbar.styleHex('#699cfa');
         //$cordovaStatusbar.hide();
           $cordovaStatusbar.show();
-      }
-      
+      }*/
+      $cordovaStatusbar.overlaysWebView(true);
+          $cordovaStatusbar.styleHex('#699cfa');
+        //$cordovaStatusbar.hide();
+          $cordovaStatusbar.show();
     }
 
 
