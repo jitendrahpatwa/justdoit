@@ -41,8 +41,8 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope,$cordovaSQLite,$cordovaGeolocation,$ionicLoading,$compile,$cordovaSplashscreen) {
-      var db = $cordovaSQLite.openDB({ name: "my.db" });
+.controller('PlaylistsCtrl', function($scope,$cordovaGeolocation,$ionicLoading,$compile,$cordovaSplashscreen) {
+      /*var db = $cordovaSQLite.openDB({ name: "my.db" });
 
 //  $scope.execute = function() {
     var query = "INSERT INTO test_table (id, name) VALUES (?,?)";
@@ -51,8 +51,52 @@ angular.module('starter.controllers', [])
       alert(res.insertId);
     }, function (err) {
       console.error(err);
-    });
+    });*/
   //};
+  var db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024);
+db.transaction(function (tx) {
+  tx.executeSql('DROP TABLE users');
+  tx.executeSql('CREATE TABLE users (id unique,name text, email text)');
+});
+
+
+var test = [
+  {
+    'name':'Alez',
+    'email':'alez@gmail.com',
+    'contact':'+919099999999'
+  }
+];
+localStorage.setItem("users",JSON.stringify(test));
+console.log("JSON localStorage data");
+console.info(JSON.parse(localStorage.getItem("users")));
+
+var arra = new Array();
+arra = JSON.parse(localStorage.getItem("users"));
+var ddd = {'name':'john','email':'john@gmail.com'};
+arra.push(ddd);
+localStorage.setItem("users",JSON.stringify(arra));
+console.log(arra);
+console.log("json new data");;
+console.log(JSON.parse(localStorage.getItem("users")));
+var a,b;
+
+
+db.transaction(function(tx){
+  for(var ii=0;ii<arra.length;ii++){
+  a = arra[ii].name,b = arra[ii].email;
+  console.debug(a + " " + b);
+  tx.executeSql("insert into users values("+(ii+1)+",'"+a+"','"+b+"')");
+  }
+});
+for(var i=0;i<arra.length;i++){
+  if(arra[i].name=="john"){
+    console.log(arra[i].email);
+   document.getElementById("users").innerHTML += arra[i].name+" "+arra[i].email;
+
+  }
+}
+
 
 
 
