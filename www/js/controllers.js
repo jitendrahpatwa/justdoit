@@ -48,7 +48,7 @@ angular.module('starter.controllers', [])
   var db = $cordovaSQLite.openDB({ name: "my.db", bgType: 1 });
 
   $scope.execute = function() {
-    var query = "INSERT INTO test_table (id INTEGER, name TEXT) VALUES (?,?)";
+    var query = "INSERT INTO test_table (id, name) VALUES (?,?)";
     $cordovaSQLite.execute(db, query, [1, "ABCDEF"]).then(function(res) {
       console.log("insertId: " + res.insertId);
       alert(res.insertId);
