@@ -24,7 +24,10 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
         //$cordovaStatusbar.hide();
           $cordovaStatusbar.show();
       }else{
-          StatusBar.backgroundColorByHexString("#699cfa");
+          $cordovaStatusbar.overlaysWebView(true);
+          $cordovaStatusbar.styleHex('#699cfa');
+        //$cordovaStatusbar.hide();
+          $cordovaStatusbar.show();
       }
       
     }
