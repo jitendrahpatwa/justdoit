@@ -18,15 +18,15 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       //StatusBar.styleDefault();
-      /*if (cordova.platformId == 'android') {
-          StatusBar.backgroundColorByHexString("#db5945");
-      }else{
-          StatusBar.backgroundColorByHexString("#db5945");
-      }*/
+      if (cordova.platformId == 'android') {
           $cordovaStatusbar.overlaysWebView(true);
-          $cordovaStatusbar.styleHex('#db5945');
+          $cordovaStatusbar.styleHex('#699cfa');
         //$cordovaStatusbar.hide();
           $cordovaStatusbar.show();
+      }else{
+          StatusBar.backgroundColorByHexString("#699cfa");
+      }
+      
     }
 
 
