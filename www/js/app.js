@@ -23,21 +23,21 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
       }else{
           StatusBar.backgroundColorByHexString("#db5945");
       }*/
+          $cordovaStatusbar.overlaysWebView(true);
+          $cordovaStatusbar.styleHex('#db5945');
+        //$cordovaStatusbar.hide();
+          $cordovaStatusbar.show();
     }
-    $cordovaStatusbar.overlaysWebView(true);
+
 
   // styles: Default : 0, LightContent: 1, BlackTranslucent: 2, BlackOpaque: 3
   //$cordovaStatusbar.style(1);
 
   // supported names: black, darkGray, lightGray, white, gray, red, green,
   // blue, cyan, yellow, magenta, orange, purple, brown
-  $cordovaStatusbar.styleColor('blue');
+  //$cordovaStatusbar.styleColor('blue');
 
-  $cordovaStatusbar.styleHex('#db5945');
-
-  //$cordovaStatusbar.hide();
-
-  $cordovaStatusbar.show();
+  
 
   //var isVisible = $cordovaStatusbar.isVisible();
   });
