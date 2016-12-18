@@ -44,10 +44,7 @@ angular.module('starter.controllers', [])
 .controller('PlaylistsCtrl', function($scope,$cordovaSQLite,$cordovaGeolocation,$ionicLoading,$compile,$cordovaSplashscreen) {
       var db = $cordovaSQLite.openDB({ name: "my.db" });
 
-  // for opening a background db:
-  var db = $cordovaSQLite.openDB({ name: "my.db", bgType: 1 });
-
-  $scope.execute = function() {
+//  $scope.execute = function() {
     var query = "INSERT INTO test_table (id, name) VALUES (?,?)";
     $cordovaSQLite.execute(db, query, [1, "ABCDEF"]).then(function(res) {
       console.log("insertId: " + res.insertId);
@@ -55,7 +52,7 @@ angular.module('starter.controllers', [])
     }, function (err) {
       console.error(err);
     });
-  };
+  //};
 
 
 
