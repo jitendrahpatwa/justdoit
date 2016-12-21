@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
-.run(function($ionicPlatform,$cordovaStatusbar,$cordovaPush) {
+.run(function($ionicPlatform,$cordovaStatusbar,$http, $cordovaPushV5) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -47,55 +47,49 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
   //var isVisible = $cordovaStatusbar.isVisible();
 
+
   ////
-  var androidConfig = {
-    "senderID": "904286916278",
+    var options = {
+    android: {
+      senderID: "904286916278"
+    },
+    ios: {
+      alert: "true",
+      badge: "true",
+      sound: "true"
+    },
+    windows: {}
   };
-
-  document.addEventListener("deviceready", function(){
-    $cordovaPush.register(androidConfig).then(function(result) {
-      // Success
-      alert("success in register");
-    }, function(err) {
-      // Error
-      alert("err in register");
+  
+  // initialize
+  $cordovaPushV5.initialize(options).then(function() {
+    // start listening for new notifications
+    $cordovaPushV5.onNotification();
+    // start listening for errors
+    $cordovaPushV5.onError();
+    
+    // register to get registrationId
+    $cordovaPushV5.register().then(function(registrationId) {
+      // save `registrationId` somewhere;
+      alert("registrationId:"+registrationId);
     })
+  });
+  
+  // triggered every time notification received
+  $rootScope.$on('$cordovaPushV5:notificationReceived', function(event, data){
+    // data.message,
+    // data.title,
+    // data.count,
+    // data.sound,
+    // data.image,
+    // data.additionalData
+  });
 
-    $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
-      switch(notification.event) {
-        case 'registered':
-          if (notification.regid.length > 0 ) {
-            alert('registration ID = ' + notification.regid);
-          }
-          break;
-
-        case 'message':
-          // this is the actual push notification. its format depends on the data model from the push server
-          alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
-          break;
-
-        case 'error':
-          alert('GCM error = ' + notification.msg);
-          break;
-
-        default:
-          alert('An unknown GCM event has occurred');
-          break;
-      }
-    });
-
-
-    // WARNING: dangerous to unregister (results in loss of tokenID)
-    $cordovaPush.unregister(options).then(function(result) {
-      // Success!
-      alert("success in unregister");
-    }, function(err) {
-      // Error
-      alert("err in unregister");
-    })
-
-  }, false);
-
+  // triggered every time error occurs
+  $rootScope.$on('$cordovaPushV5:errorOcurred', function(event, e){
+    // e.message
+    alert("e.message:"+e.message);
+  });
   });
 })
 
