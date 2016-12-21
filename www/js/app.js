@@ -71,7 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
     // register to get registrationId
     $cordovaPushV5.register().then(function(registrationId) {
       // save `registrationId` somewhere;
-      alert("registrationId:"+registrationId);
+      //alert("registrationId:"+registrationId);
     })
   });
   
