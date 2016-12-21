@@ -53,7 +53,7 @@ angular.module('starter.controllers', [])
       console.error(err);
     });*/
   //};
-  var db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024);
+/*  var db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024);
 db.transaction(function (tx) {
   tx.executeSql('DROP TABLE users');
   tx.executeSql('CREATE TABLE users (id unique,name text, email text)');
@@ -206,7 +206,7 @@ for(var i=0;i<arra.length;i++){
       $scope.clickTest = function() {
         alert('Example of infowindow with ng-click')
       };
-  
+  */
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
